@@ -28,7 +28,10 @@
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import selectionsort as sc
+from DISClib.Algorithms.Sorting import insertionsort as ns
 assert cf
+import time
 
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
@@ -36,38 +39,38 @@ los mismos.
 """
 
 # Construccion de modelos
-def newCatalog():
+def newCatalog(TypeList):
     catalog = {"videos": None,
                 "channel":None,
                 "category":None}
     catalog["videos"] = lt.newList()
-    catalog["channel"] = lt.newList("ARRAY_LIST", cmpfunction=comparechannel)
-    catalog["category"] = lt.newList("ARRAY_LIST", cmpfunction=comparecategory)
+    catalog["channel"] = lt.newList(TypeList, cmpfunction=comparechannel)
+    catalog["category"] = lt.newList(TypeList, cmpfunction=comparecategory)
     return catalog
 
 # Funciones para agregar informacion al catalogo
-def addVideo(catalog, video):
+def addVideo(catalog, video, TypeList):
     lt.addLast(catalog['videos'], video)
     channels = video["channel_title"].split(",")
     for channel in channels:
-        addChannel(catalog, channel.strip(), video)
-def addChannel(catalog, channelname, video):
+        addChannel(catalog, channel.strip(), video, TypeList)
+def addChannel(catalog, channelname, video, TypeList):
     channels = catalog["channel"]
     poschannel = lt.isPresent(channels, channelname)
     if poschannel > 0:
         channel = lt.getElement(channels, poschannel)
     else:
-        channel = newChannel(channelname)
+        channel = newChannel(channelname, TypeList)
         lt.addLast(channels, channel)
     lt.addLast(channel["videos"], video)
 def addCategory(catalog, category):
     t = 1
     lt.addLast(catalog["category"], t)
 # Funciones para creacion de datos
-def newChannel(name):
+def newChannel(name, TypeList):
     channel = {"name": "", "videos": None}
     channel["name"]=name
-    channel["videos"]=lt.newList("ARRAY_LIST")
+    channel["videos"]=lt.newList(TypeList)
     return channel
 def newCategory(name, id):
     category = {"category_name": "", "category_id": ""}
@@ -83,5 +86,29 @@ def comparechannel(channelname1, channel):
     return -1
 def comparecategory(name, id):
     return(name == id["name"])
+def cmpVideosByViews(video1, video2):
+     return (float(video1['views']) < float(video2['views']))
 
 # Funciones de ordenamiento
+def sortVideos(catalog, size, Algoritmo):
+    sub_list = lt.subList(catalog['videos'], 1, size)
+    sub_list = sub_list.copy()
+    if Algoritmo ==1:
+        print("111111")
+        start_time = time.process_time()
+        sorted_list = sc.sort(sub_list, cmpVideosByViews)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+    elif Algoritmo == 2:
+        print("222222")
+        start_time = time.process_time()
+        sorted_list = ns.sort(sub_list, cmpVideosByViews)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)
+    elif Algoritmo == 3:
+        print("333333")
+        start_time = time.process_time()
+        sorted_list = sa.sort(sub_list, cmpVideosByViews)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)
+    return elapsed_time_mseg

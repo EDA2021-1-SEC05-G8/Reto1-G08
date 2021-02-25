@@ -38,17 +38,42 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- Encontrar buenos videos por categoría y país")
+    print("2- Ordenar videos por vistas")
     print("3- Encontrar video tendencia por país")
     print("4- Encontrar video tendencia por categoría")
     print("5- Buscar los videos con más Likes")
     print("0- Salir")   
+def SelectList():
+    print("Seleccione el tipo de representación de la lista:")
+    print("1- ARRAY_LIST")
+    print("2- LINKED_LIST")
+    inputs = input('Seleccione una opción para continuar \n')
+    if int(inputs[0]) == 1:
+        return "ARRAY_LIST"
+    elif int(inputs[0]) == 2:
+        return "LINKED_LIST"
+    else:
+        sys.exit(0)
+def SelectAlgoritmo():
+    print("Seleccione el tipo de algoritmo de ordenamiento iterativo:")
+    print("1- selection")
+    print("2- insertion")
+    print("3- shell")
+    inputs = input('Seleccione una opción para continuar \n')
+    if int(inputs[0]) == 1:
+        return 1
+    elif int(inputs[0]) == 2:
+        return 2
+    elif int(inputs[0]) == 3:
+        return 3
+    else:
+        sys.exit(0)
+    
+def initCatalog(TypeList):
+    return controller.initCatalog(TypeList)
 
-def initCatalog():
-    return controller.initCatalog()
-
-def loadData(catalog):
-    controller.loadData(catalog)
+def loadData(catalog, TypeList):
+    controller.loadData(catalog, TypeList)
 
 """
 Menu principal
@@ -57,16 +82,20 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar \n')
     if int(inputs[0]) == 1:
+        TypeList=SelectList()
         print("Cargando información de los archivos ....")
-        catalog = initCatalog()
-        loadData(catalog)
+        catalog = initCatalog(TypeList)
+        loadData(catalog, TypeList)
         print('Libros videos cargados: ' + str(lt.size(catalog['videos'])))
         print('Canales cargados: ' + str(lt.size(catalog['channel'])))
         print('Categorias cargadas: ' + str(lt.size(catalog['category'])))
 
     elif int(inputs[0]) == 2:
-        pass
-
+        Algoritmo = SelectAlgoritmo()
+        size = input("Indique tamaño de la muestra: ")
+        result = controller.sortVideos(catalog, int(size), Algoritmo)
+        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                                          str(result))
     else:
         sys.exit(0)
 sys.exit(0)
