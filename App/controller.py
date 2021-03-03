@@ -50,7 +50,7 @@ def loadVideos(catalog, TypeList):
         model.addVideo(catalog, video, TypeList)
 def loadCategory(catalog):
     categoryfile = cf.data_dir + "category-id.csv"
-    input_file = csv.DictReader(open(categoryfile, encoding='utf-8'))
+    input_file = csv.DictReader(open(categoryfile, encoding="utf-8"),  delimiter='\t')
     for category in input_file:
         model.addCategory(catalog, category)
 # Funciones de ordenamiento

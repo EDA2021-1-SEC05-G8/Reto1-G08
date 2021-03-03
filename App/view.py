@@ -59,6 +59,8 @@ def SelectAlgoritmo():
     print("1- selection")
     print("2- insertion")
     print("3- shell")
+    print("4- merge")
+    print("5- quick")
     inputs = input('Seleccione una opción para continuar \n')
     if int(inputs[0]) == 1:
         return 1
@@ -66,6 +68,10 @@ def SelectAlgoritmo():
         return 2
     elif int(inputs[0]) == 3:
         return 3
+    elif int(inputs[0]) == 4:
+        return 4
+    elif int(inputs[0]) == 5:
+        return 5
     else:
         sys.exit(0)
     

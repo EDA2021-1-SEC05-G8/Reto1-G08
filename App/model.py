@@ -30,6 +30,8 @@ from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.Algorithms.Sorting import selectionsort as sc
 from DISClib.Algorithms.Sorting import insertionsort as ns
+from DISClib.Algorithms.Sorting import mergesort as mg
+from DISClib.Algorithms.Sorting import quicksort as qc
 assert cf
 import time
 
@@ -64,7 +66,7 @@ def addChannel(catalog, channelname, video, TypeList):
         lt.addLast(channels, channel)
     lt.addLast(channel["videos"], video)
 def addCategory(catalog, category):
-    t = 1
+    t = newCategory(category['name'], category['id'])
     lt.addLast(catalog["category"], t)
 # Funciones para creacion de datos
 def newChannel(name, TypeList):
@@ -104,11 +106,23 @@ def sortVideos(catalog, size, Algoritmo):
         start_time = time.process_time()
         sorted_list = ns.sort(sub_list, cmpVideosByViews)
         stop_time = time.process_time()
-        elapsed_time_mseg = (stop_time - start_time)
+        elapsed_time_mseg = (stop_time - start_time)*1000
     elif Algoritmo == 3:
         print("333333")
         start_time = time.process_time()
         sorted_list = sa.sort(sub_list, cmpVideosByViews)
         stop_time = time.process_time()
-        elapsed_time_mseg = (stop_time - start_time)
+        elapsed_time_mseg = (stop_time - start_time)*1000
+    elif Algoritmo == 4:
+        print("4444")
+        start_time = time.process_time()
+        sorted_list = mg.sort(sub_list, cmpVideosByViews)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+    elif Algoritmo == 5:
+        print("55555")
+        start_time = time.process_time()
+        sorted_list = qc.sort(sub_list, cmpVideosByViews)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg
