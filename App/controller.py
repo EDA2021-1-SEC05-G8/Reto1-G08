@@ -42,9 +42,10 @@ def initCatalog(TypeList):
 def loadData(catalog, TypeList):
     loadVideos(catalog, TypeList)
     loadCategory(catalog)
+    sortVideos(catalog)
 
 def loadVideos(catalog, TypeList):
-    videosfile = cf.data_dir + "videos-5pct.csv"
+    videosfile = cf.data_dir + "videos-small.csv"
     input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
     for video in input_file:
         model.addVideo(catalog, video, TypeList)
@@ -54,9 +55,9 @@ def loadCategory(catalog):
     for category in input_file:
         model.addCategory(catalog, category)
 # Funciones de ordenamiento
-def sortVideos(catalog, size, Algoritmo):
+def sortVideos(catalog):
     """
     Ordena los libros por average_rating
     """
-    return model.sortVideos(catalog, size, Algoritmo)
+    return model.sortVideos(catalog)
 # Funciones de consulta sobre el catálogo

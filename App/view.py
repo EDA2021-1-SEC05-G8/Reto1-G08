@@ -38,7 +38,7 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- Ordenar videos por vistas")
+    print("2- Encontrar buenos videos por categoría y país")
     print("3- Encontrar video tendencia por país")
     print("4- Encontrar video tendencia por categoría")
     print("5- Buscar los videos con más Likes")
@@ -92,16 +92,12 @@ while True:
         print("Cargando información de los archivos ....")
         catalog = initCatalog(TypeList)
         loadData(catalog, TypeList)
-        print('Libros videos cargados: ' + str(lt.size(catalog['videos'])))
+        print('videos cargados: ' + str(lt.size(catalog['videos'])))
         print('Canales cargados: ' + str(lt.size(catalog['channel'])))
         print('Categorias cargadas: ' + str(lt.size(catalog['category'])))
 
     elif int(inputs[0]) == 2:
-        Algoritmo = SelectAlgoritmo()
-        size = input("Indique tamaño de la muestra: ")
-        result = controller.sortVideos(catalog, int(size), Algoritmo)
-        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
-                                          str(result))
+        pass
     else:
         sys.exit(0)
 sys.exit(0)

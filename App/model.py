@@ -92,37 +92,6 @@ def cmpVideosByViews(video1, video2):
      return (float(video1['views']) < float(video2['views']))
 
 # Funciones de ordenamiento
-def sortVideos(catalog, size, Algoritmo):
-    sub_list = lt.subList(catalog['videos'], 1, size)
-    sub_list = sub_list.copy()
-    if Algoritmo ==1:
-        print("111111")
-        start_time = time.process_time()
-        sorted_list = sc.sort(sub_list, cmpVideosByViews)
-        stop_time = time.process_time()
-        elapsed_time_mseg = (stop_time - start_time)*1000
-    elif Algoritmo == 2:
-        print("222222")
-        start_time = time.process_time()
-        sorted_list = ns.sort(sub_list, cmpVideosByViews)
-        stop_time = time.process_time()
-        elapsed_time_mseg = (stop_time - start_time)*1000
-    elif Algoritmo == 3:
-        print("333333")
-        start_time = time.process_time()
-        sorted_list = sa.sort(sub_list, cmpVideosByViews)
-        stop_time = time.process_time()
-        elapsed_time_mseg = (stop_time - start_time)*1000
-    elif Algoritmo == 4:
-        print("4444")
-        start_time = time.process_time()
-        sorted_list = mg.sort(sub_list, cmpVideosByViews)
-        stop_time = time.process_time()
-        elapsed_time_mseg = (stop_time - start_time)*1000
-    elif Algoritmo == 5:
-        print("55555")
-        start_time = time.process_time()
-        sorted_list = qc.sort(sub_list, cmpVideosByViews)
-        stop_time = time.process_time()
-        elapsed_time_mseg = (stop_time - start_time)*1000
-    return elapsed_time_mseg
+def sortVideos(catalog):
+    print("4444")
+    mg.sort(catalog["videos"], cmpVideosByViews)
