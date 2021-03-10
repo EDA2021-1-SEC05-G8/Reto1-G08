@@ -114,10 +114,14 @@ while True:
         print(videos)
     elif int(inputs[0]) == 3:
         pais=input("escriba el pais para continuar: ")
+        print("el Video con los filtros establecidos es: ")
         vis=VidByPais(catalog, pais)
+        print(vis)
     elif int(inputs[0]) == 4:
         cat=input("escriba la categoria para continuar: ")
         vis=VidbyCat(catalog, cat)
+        print("el Video con los filtros establecidos es: ")
+        print(vis)
     elif int(inputs[0]) == 5:
         number = input("Buscando los TOP ?: ")
         pais=input("escriba el pais para continuar: ")

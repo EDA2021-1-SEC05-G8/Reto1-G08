@@ -84,7 +84,8 @@ def VidByCatPais(catalog, cat, pais, number):
     videos = catalog["videos"]
     cmpcategoria = catalog["category"]
     bestvideos1 = lt.newList()
-    bestvideos2 = lt.newList()
+    #bestvideos2 = lt.newList()
+    new_datalist = []
     idname=getVideosByCat(cmpcategoria, cat)
     i=1
     while i <= lt.size(videos):
@@ -97,13 +98,28 @@ def VidByCatPais(catalog, cat, pais, number):
         i=i+1
     if lt.size(bestvideos1)>number+1:
         for cont in range(1, number+1):
-            video = lt.getElement(bestvideos1, cont)
-            lt.addLast(bestvideos2, video)
+            new_elem = {}
+            new_elem['trending_date'] = lt.getElement(bestvideos1, cont).get("trending_date")
+            new_elem['titulo'] = lt.getElement(bestvideos1, cont).get("title")
+            new_elem['titulo_canal'] = lt.getElement(bestvideos1, cont).get("channel_title")
+            new_elem['publish_time'] = lt.getElement(bestvideos1, cont).get("publish_time")
+            new_elem['vistas'] = lt.getElement(bestvideos1, cont).get("views")
+            new_elem['likes'] = lt.getElement(bestvideos1, cont).get("likes")
+            new_elem['dislikes'] = lt.getElement(bestvideos1, cont).get("dislikes")
+            new_datalist.append(new_elem)
+
     else:
         for cont in range(1, lt.size(bestvideos1)+1):
-            video = lt.getElement(bestvideos1, cont)
-            lt.addLast(bestvideos2, video)
-    return bestvideos2
+            new_elem = {}
+            new_elem['trending_date'] = lt.getElement(bestvideos1, cont).get("trending_date")
+            new_elem['titulo'] = lt.getElement(bestvideos1, cont).get("title")
+            new_elem['titulo_canal'] = lt.getElement(bestvideos1, cont).get("channel_title")
+            new_elem['publish_time'] = lt.getElement(bestvideos1, cont).get("publish_time")
+            new_elem['vistas'] = lt.getElement(bestvideos1, cont).get("views")
+            new_elem['likes'] = lt.getElement(bestvideos1, cont).get("likes")
+            new_elem['dislikes'] = lt.getElement(bestvideos1, cont).get("dislikes")
+            new_datalist.append(new_elem)
+    return new_datalist
 
 def VidByPais(catalog, pais):
     vidbypais = lt.newList()
@@ -122,15 +138,12 @@ def VidByPais(catalog, pais):
         video_id=lt.getElement(vidbypais, j).get("video_id")
         new_list.append(video_id)
         j=j+1
-    print(new_list)
     #   hacemos una lista con el numero de elementos de cada una
     countlista = [new_list.count(num) for num in new_list]
     # obtenemos el mayor elemeto y su indice
     max_num = max(countlista)
-    print(max_num)
     max_index = countlista.index(max_num)
     max_id=new_list[max_index]
-    print(max_id)
     # devolvemos el elemento
     k=1
     video_max1=lt.getElement(vidbypais, k)
@@ -140,8 +153,13 @@ def VidByPais(catalog, pais):
             video_max1=lt.getElement(vidbypais, k)
             break
         k=k+1
-    print(video_max1)
-    return video_max1        
+    #presentación datos
+    new_elem = {}
+    new_elem['titulo'] = video_max1.get("title")
+    new_elem['titulo_canal'] = video_max1.get("channel_title")
+    new_elem['país'] = video_max1.get("country")
+    new_elem['dias'] = max_num
+    return new_elem     
 
 
 
@@ -154,7 +172,6 @@ def VidbyCat(catalog, cat):
     while i <= lt.size(videos):
         idvideo = lt.getElement(videos, i).get("category_id")
         if idname == idvideo:
-            
             video = lt.getElement(videos, i)
             lt.addLast(videoscat, video)
         i=i+1
@@ -166,17 +183,15 @@ def VidbyCat(catalog, cat):
         video_id=lt.getElement(videoscat, j).get("video_id")
         new_list.append(video_id)
         j=j+1
-    print(new_list)
 
     #   hacemos una lista con el numero de elementos de cada una
     countlista = [new_list.count(num) for num in new_list]
-    print(countlista)
+    
     # obtenemos el mayor elemeto y su indice
     max_num = max(countlista)
-    print(max_num)
     max_index = countlista.index(max_num)
     max_id=new_list[max_index]
-    print(max_id)
+    
     # devolvemos el elemento
     k=1
     video_max1=lt.getElement(videoscat, k)
@@ -186,13 +201,19 @@ def VidbyCat(catalog, cat):
             video_max1=lt.getElement(videoscat, k)
             break
         k=k+1
-    print(video_max1)
-    return video_max1   
+    ########### presentacion de datos
+    new_elem = {}
+    new_elem['titulo'] = video_max1.get("title")
+    new_elem['titulo_canal'] = video_max1.get("channel_title")
+    new_elem['category_id'] = video_max1.get("category_id")
+    new_elem['dias'] = max_num
+    return new_elem   
 
 def VidBytagPais(catalog, tag, pais, number):
     videos = catalog["videos"]
     videoslikes=lt.newList()
-    videostags=lt.newList()
+    #videostags=lt.newList()
+    new_datalist = []
     i=1
     while i <= lt.size(videos):
         country = lt.getElement(videos, i).get("country")
@@ -203,13 +224,27 @@ def VidBytagPais(catalog, tag, pais, number):
         i=i+1
     if lt.size(videoslikes)>number+1:
         for cont in range(1, number+1):
-            video = lt.getElement(videoslikes, cont)
-            lt.addLast(videostags, video)
+            new_elem = {}
+            new_elem['titulo'] = lt.getElement(videoslikes, cont).get("title")
+            new_elem['titulo_canal'] = lt.getElement(videoslikes, cont).get("channel_title")
+            new_elem['publish_time'] = lt.getElement(videoslikes, cont).get("publish_time")
+            new_elem['vistas'] = lt.getElement(videoslikes, cont).get("views")
+            new_elem['likes'] = lt.getElement(videoslikes, cont).get("likes")
+            new_elem['dislikes'] = lt.getElement(videoslikes, cont).get("dislikes")
+            new_elem['tags'] = lt.getElement(videoslikes, cont).get("tags")
+            new_datalist.append(new_elem)
     else:
         for cont in range(1, lt.size(videoslikes)+1):
-            video = lt.getElement(videoslikes, cont)
-            lt.addLast(videostags, video)
-    return videostags
+            new_elem = {}
+            new_elem['titulo'] = lt.getElement(videoslikes, cont).get("title")
+            new_elem['titulo_canal'] = lt.getElement(videoslikes, cont).get("channel_title")
+            new_elem['publish_time'] = lt.getElement(videoslikes, cont).get("publish_time")
+            new_elem['vistas'] = lt.getElement(videoslikes, cont).get("views")
+            new_elem['likes'] = lt.getElement(videoslikes, cont).get("likes")
+            new_elem['dislikes'] = lt.getElement(videoslikes, cont).get("dislikes")
+            new_elem['tags'] = lt.getElement(videoslikes, cont).get("tags")
+            new_datalist.append(new_elem)
+    return new_datalist
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def comparechannel(channelname1, channel):
@@ -220,12 +255,11 @@ def comparecategory(name, id):
     return(name == id["name"])
 def getVideosByCat(catalog, name):
     i=1
-    idname="jaja"
+    idname=""
     while i <= lt.size(catalog):
         categoria = lt.getElement(catalog, i).get("category_name")
         if str(categoria) == name:
             idname = lt.getElement(catalog, i).get("category_id")
-            print(idname)
             break
         else:
             i=i+1
