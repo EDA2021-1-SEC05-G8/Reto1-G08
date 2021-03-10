@@ -85,6 +85,8 @@ def VidByCatPais(catalog, cat, pais, number):
     return controller.VidByCatPais(catalog, cat, pais, number)
 def VidByPais(catalog, pais):
     return controller.VidByPais(catalog, pais)
+def VidbyCat(catalog, cat):
+    return controller.VidbyCat(catalog, cat)
 
 """
 Menu principal
@@ -111,6 +113,9 @@ while True:
     elif int(inputs[0]) == 3:
         pais=input("escriba el pais para continuar: ")
         vis=VidByPais(catalog, pais)
+    elif int(inputs[0]) == 4:
+        cat=input("escriba la categoria para continuar: ")
+        vis=VidbyCat(catalog, cat)
     else:
         sys.exit(0)
 sys.exit(0)

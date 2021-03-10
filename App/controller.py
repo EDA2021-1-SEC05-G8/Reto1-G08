@@ -67,3 +67,6 @@ def VidByCatPais(catalog, cat, pais, number):
 
 def VidByPais(catalog, pais):
     return model.VidByPais(catalog, pais)
+
+def VidbyCat(catalog, cat):
+    return model.VidbyCat(catalog, cat)

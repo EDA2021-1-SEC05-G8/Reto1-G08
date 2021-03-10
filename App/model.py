@@ -140,6 +140,53 @@ def VidByPais(catalog, pais):
     print(video_max1)
     return video_max1        
 
+
+
+def VidbyCat(catalog, cat):
+    videos = catalog["videos"]
+    cmpcategoria = catalog["category"]
+    idname=getVideosByCat(cmpcategoria, cat)
+    videoscat = lt.newList()
+    i=1
+    while i <= lt.size(videos):
+        idvideo = lt.getElement(videos, i).get("category_id")
+        if idname == idvideo:
+            
+            video = lt.getElement(videos, i)
+            lt.addLast(videoscat, video)
+        i=i+1
+
+    #   obtenemos los id dentro de una lista
+    new_list=[]
+    j=1
+    while j <= lt.size(videoscat):
+        video_id=lt.getElement(videoscat, j).get("video_id")
+        new_list.append(video_id)
+        j=j+1
+    print(new_list)
+
+    #   hacemos una lista con el numero de elementos de cada una
+    countlista = [new_list.count(num) for num in new_list]
+    print(countlista)
+    # obtenemos el mayor elemeto y su indice
+    max_num = max(countlista)
+    print(max_num)
+    max_index = countlista.index(max_num)
+    max_id=new_list[max_index]
+    print(max_id)
+    # devolvemos el elemento
+    k=1
+    video_max1=lt.getElement(videoscat, k)
+    while k <= lt.size(videoscat):
+        video_max2=lt.getElement(videoscat, k).get("video_id")
+        if video_max2 == max_id:
+            video_max1=lt.getElement(videoscat, k)
+            break
+        k=k+1
+    print(video_max1)
+    return video_max1   
+
+
 # Funciones utilizadas para comparar elementos dentro de una lista
 def comparechannel(channelname1, channel):
     if (channelname1.lower() in channel["name"].lower()):
@@ -161,6 +208,10 @@ def getVideosByCat(catalog, name):
     return idname
 def cmpVideosByViews(video1, video2):
      return (float(video1['views']) < float(video2['views']))
+
+
+
+
 
 # Funciones de ordenamiento
 def sortVideos(catalog):
