@@ -81,6 +81,11 @@ def initCatalog(TypeList):
 def loadData(catalog, TypeList):
     controller.loadData(catalog, TypeList)
 
+def VidByCatPais(catalog, cat, pais, number):
+    return controller.VidByCatPais(catalog, cat, pais, number)
+def VidByPais(catalog, pais):
+    return controller.VidByPais(catalog, pais)
+
 """
 Menu principal
 """
@@ -97,7 +102,15 @@ while True:
         print('Categorias cargadas: ' + str(lt.size(catalog['category'])))
 
     elif int(inputs[0]) == 2:
-        pass
+        number = input("Buscando los TOP ?: ")
+        cat= input("Escriba la categoria para continuar: ")
+        pais= input("escriba el pais para continuar: ")
+        videos=VidByCatPais(catalog, cat, pais, int(number))
+        print("los Videos con los filtros establecidos son: ")
+        print(videos)
+    elif int(inputs[0]) == 3:
+        pais=input("escriba el pais para continuar: ")
+        vis=VidByPais(catalog, pais)
     else:
         sys.exit(0)
 sys.exit(0)

@@ -61,3 +61,9 @@ def sortVideos(catalog):
     """
     return model.sortVideos(catalog)
 # Funciones de consulta sobre el catálogo
+def VidByCatPais(catalog, cat, pais, number):
+
+    return model.VidByCatPais(catalog, cat, pais, number)
+
+def VidByPais(catalog, pais):
+    return model.VidByPais(catalog, pais)

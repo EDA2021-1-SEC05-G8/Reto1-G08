@@ -80,6 +80,51 @@ def newCategory(name, id):
     category["category_id"]=id
     return category
 # Funciones de consulta
+def VidByCatPais(catalog, cat, pais, number):
+    videos = catalog["videos"]
+    cmpcategoria = catalog["category"]
+    bestvideos1 = lt.newList()
+    bestvideos2 = lt.newList()
+    idname=getVideosByCat(cmpcategoria, cat)
+    i=1
+    while i <= lt.size(videos):
+        country = lt.getElement(videos, i).get("country")
+        idvideo = lt.getElement(videos, i).get("category_id")
+        if country == pais and idname == idvideo:
+            
+            video = lt.getElement(videos, i)
+            lt.addLast(bestvideos1, video)
+            print("unasfdd dsaavds ds")
+        i=i+1
+    for cont in range(1, number+1):
+        video = lt.getElement(videos, cont)
+        lt.addLast(bestvideos2, video)
+        print("dfgsd fsdgs sfd")
+    return bestvideos2
+
+def VidByPais(catalog, pais):
+    vidbypais = lt.newList()
+    videos=catalog["videos"]
+    i=1
+    while i <= lt.size(videos):
+        country = lt.getElement(videos, i).get("country")
+        if country == pais:
+            video = lt.getElement(videos, i)
+            lt.addLast(vidbypais, video)
+        i=i+1
+    ##########################################
+    j=1
+    while j <= lt.size(vidbypais):
+        video_id = lt.getElement(vidbypais, j).get("video_id")
+        contador=0
+        if video_id == "WpqUOW19aJQ":
+            print(j)
+            print("###")
+            contador = contador+1
+        j=j+1
+    print(lt.getElement(vidbypais, 106).get("video_id"))
+    print(contador)
+    return vidbypais
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def comparechannel(channelname1, channel):
@@ -88,6 +133,18 @@ def comparechannel(channelname1, channel):
     return -1
 def comparecategory(name, id):
     return(name == id["name"])
+def getVideosByCat(catalog, name):
+    i=1
+    idname="jaja"
+    while i <= lt.size(catalog):
+        categoria = lt.getElement(catalog, i).get("category_name")
+        if str(categoria) == name:
+            idname = lt.getElement(catalog, i).get("category_id")
+            print(idname)
+            break
+        else:
+            i=i+1
+    return idname
 def cmpVideosByViews(video1, video2):
      return (float(video1['views']) < float(video2['views']))
 
