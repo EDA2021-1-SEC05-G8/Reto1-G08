@@ -186,6 +186,23 @@ def VidbyCat(catalog, cat):
     print(video_max1)
     return video_max1   
 
+def VidBytagPais(catalog, tag, pais, number):
+    videos = catalog["videos"]
+    videoslikes=lt.newList()
+    videostags=lt.newList()
+    i=1
+    while i <= lt.size(videos):
+        country = lt.getElement(videos, i).get("country")
+        tags = str(lt.getElement(videos, i).get("tags"))
+        if pais == country and tags.find(tag)>-1:
+            video = lt.getElement(videos, i)
+            lt.addLast(videoslikes, video)
+        i=i+1
+    
+    for cont in range(1, number+1):
+        video = lt.getElement(videoslikes, cont)
+        lt.addLast(videostags, video)
+    return videostags
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def comparechannel(channelname1, channel):
@@ -206,14 +223,19 @@ def getVideosByCat(catalog, name):
         else:
             i=i+1
     return idname
+
 def cmpVideosByViews(video1, video2):
      return (float(video1['views']) < float(video2['views']))
 
-
-
+def cmpVideosByLikes(video1, video2):
+    return (float(video1["likes"]) < float(video2["likes"]))
 
 
 # Funciones de ordenamiento
+
 def sortVideos(catalog):
     print("4444")
     mg.sort(catalog["videos"], cmpVideosByViews)
+
+def sortVideosLikes(catalog):
+    mg.sort(catalog["videos"], cmpVideosByLikes)

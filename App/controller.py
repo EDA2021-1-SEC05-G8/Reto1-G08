@@ -60,6 +60,9 @@ def sortVideos(catalog):
     Ordena los libros por average_rating
     """
     return model.sortVideos(catalog)
+
+def sortVideosLikes(catalog):
+    return model.sortVideosLikes(catalog)
 # Funciones de consulta sobre el catálogo
 def VidByCatPais(catalog, cat, pais, number):
 
@@ -70,3 +73,7 @@ def VidByPais(catalog, pais):
 
 def VidbyCat(catalog, cat):
     return model.VidbyCat(catalog, cat)
+
+def VidBytagPais(catalog, tag, pais, number):
+    sortVideosLikes(catalog)
+    return model.VidBytagPais(catalog, tag, pais, number)

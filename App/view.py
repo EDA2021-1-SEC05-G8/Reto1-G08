@@ -87,6 +87,8 @@ def VidByPais(catalog, pais):
     return controller.VidByPais(catalog, pais)
 def VidbyCat(catalog, cat):
     return controller.VidbyCat(catalog, cat)
+def VidBytagPais(catalog, tag, pais, number):
+    return controller.VidBytagPais(catalog, tag, pais, number)
 
 """
 Menu principal
@@ -116,6 +118,13 @@ while True:
     elif int(inputs[0]) == 4:
         cat=input("escriba la categoria para continuar: ")
         vis=VidbyCat(catalog, cat)
+    elif int(inputs[0]) == 5:
+        number = input("Buscando los TOP ?: ")
+        pais=input("escriba el pais para continuar: ")
+        tag=input("escriba el tag para continuar: ")
+        videos= VidBytagPais(catalog, tag, pais, int(number))
+        print("los Videos con los filtros establecidos son: ")
+        print(videos)
     else:
         sys.exit(0)
 sys.exit(0)
