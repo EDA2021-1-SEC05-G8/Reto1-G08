@@ -112,19 +112,33 @@ def VidByPais(catalog, pais):
             video = lt.getElement(videos, i)
             lt.addLast(vidbypais, video)
         i=i+1
-    ##########################################
+    #   obtenemos los id dentro de una lista
+    new_list=[]
     j=1
     while j <= lt.size(vidbypais):
-        video_id = lt.getElement(vidbypais, j).get("video_id")
-        contador=0
-        if video_id == "WpqUOW19aJQ":
-            print(j)
-            print("###")
-            contador = contador+1
+        video_id=lt.getElement(vidbypais, j).get("video_id")
+        new_list.append(video_id)
         j=j+1
-    print(lt.getElement(vidbypais, 106).get("video_id"))
-    print(contador)
-    return vidbypais
+    print(new_list)
+    #   hacemos una lista con el numero de elementos de cada una
+    countlista = [new_list.count(num) for num in new_list]
+    # obtenemos el mayor elemeto y su indice
+    max_num = max(countlista)
+    print(max_num)
+    max_index = countlista.index(max_num)
+    max_id=new_list[max_index]
+    print(max_id)
+    # devolvemos el elemento
+    k=1
+    video_max1=lt.getElement(vidbypais, k)
+    while k <= lt.size(vidbypais):
+        video_max2=lt.getElement(vidbypais, k).get("video_id")
+        if video_max2 == max_id:
+            video_max1=lt.getElement(vidbypais, k)
+            break
+        k=k+1
+    print(video_max1)
+    return video_max1        
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def comparechannel(channelname1, channel):
