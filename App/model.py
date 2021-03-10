@@ -94,12 +94,15 @@ def VidByCatPais(catalog, cat, pais, number):
             
             video = lt.getElement(videos, i)
             lt.addLast(bestvideos1, video)
-            print("unasfdd dsaavds ds")
         i=i+1
-    for cont in range(1, number+1):
-        video = lt.getElement(videos, cont)
-        lt.addLast(bestvideos2, video)
-        print("dfgsd fsdgs sfd")
+    if lt.size(videos)>number+1:
+        for cont in range(1, number+1):
+            video = lt.getElement(videos, cont)
+            lt.addLast(bestvideos2, video)
+    else:
+        for cont in range(1, lt.size(videos)+1):
+            video = lt.getElement(videos, cont)
+            lt.addLast(bestvideos2, video)
     return bestvideos2
 
 def VidByPais(catalog, pais):
@@ -198,10 +201,14 @@ def VidBytagPais(catalog, tag, pais, number):
             video = lt.getElement(videos, i)
             lt.addLast(videoslikes, video)
         i=i+1
-    
-    for cont in range(1, number+1):
-        video = lt.getElement(videoslikes, cont)
-        lt.addLast(videostags, video)
+    if lt.size(videoslikes)>number+1:
+        for cont in range(1, number+1):
+            video = lt.getElement(videoslikes, cont)
+            lt.addLast(videostags, video)
+    else:
+        for cont in range(1, lt.size(videoslikes)+1):
+            video = lt.getElement(videoslikes, cont)
+            lt.addLast(videostags, video)
     return videostags
 
 # Funciones utilizadas para comparar elementos dentro de una lista
