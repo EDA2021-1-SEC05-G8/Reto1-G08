@@ -95,13 +95,13 @@ def VidByCatPais(catalog, cat, pais, number):
             video = lt.getElement(videos, i)
             lt.addLast(bestvideos1, video)
         i=i+1
-    if lt.size(videos)>number+1:
+    if lt.size(bestvideos1)>number+1:
         for cont in range(1, number+1):
-            video = lt.getElement(videos, cont)
+            video = lt.getElement(bestvideos1, cont)
             lt.addLast(bestvideos2, video)
     else:
-        for cont in range(1, lt.size(videos)+1):
-            video = lt.getElement(videos, cont)
+        for cont in range(1, lt.size(bestvideos1)+1):
+            video = lt.getElement(bestvideos1, cont)
             lt.addLast(bestvideos2, video)
     return bestvideos2
 
